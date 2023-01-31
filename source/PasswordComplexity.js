@@ -7,9 +7,6 @@ const PasswordComplexityValues = {
 const calculateComplexity = (password) => {
     let complexity = PasswordComplexityValues.WEAK;
     if (password) {
-        const numbers = countNumbers(password);
-        const containsLetters = hasLetters(password);
-
         const minimumLengthPassed = lengthIsGreaterOrEqualThan(password, 8);
         const lettersAndAtLeastTwoNumbersPassed = containsLetters(password) && containsNumbers(password, 2);
 
