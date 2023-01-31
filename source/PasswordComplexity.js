@@ -4,6 +4,8 @@ const PasswordComplexityValues = {
     EXCELLENT: 'excellent',
 }
 
-const calculateComplexity = password => 'Good Luck!'
+const calculateComplexity = (password) => {
+    return PasswordComplexityValues.WEAK;
+}
 
 module.exports = { calculateComplexity, PasswordComplexityValues }
