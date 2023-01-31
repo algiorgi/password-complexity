@@ -5,7 +5,11 @@ const PasswordComplexityValues = {
 }
 
 const calculateComplexity = (password) => {
-    return PasswordComplexityValues.WEAK;
+
+    const passwordLength = password.length;
+
+    let complexity = passwordLength >= 8 ? PasswordComplexityValues.GOOD : PasswordComplexityValues.WEAK;
+    return complexity;
 }
 
 module.exports = { calculateComplexity, PasswordComplexityValues }
