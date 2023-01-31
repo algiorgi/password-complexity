@@ -14,5 +14,16 @@ describe('Password complexity tests', () => {
     it('should be weak', () => {
         const complexity = calculateComplexity('pass')
         expect(complexity).toEqual(PasswordComplexityValues.WEAK)
-    })    
+    })
+
+    const theories = [
+        {description: 'password 12 should be weak', password: '12', expected: PasswordComplexityValues.WEAK}
+    ];
+
+    theories.forEach(theory => {
+        it(theory.description, () => {
+            const complexity = calculateComplexity(theory.password)
+            expect(complexity).toEqual(theory.expected)
+        })
+    });
 })
