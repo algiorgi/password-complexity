@@ -17,7 +17,11 @@ describe('Password complexity tests', () => {
     })
 
     const theories = [
-        {description: 'password 12 should be weak', password: '12', expected: PasswordComplexityValues.WEAK}
+        {description: 'password 12 should be weak', password: '12', expected: PasswordComplexityValues.WEAK},
+        {description: 'empty password should be weak', password: '', expected: PasswordComplexityValues.WEAK},
+        {description: 'undefined should be weak', password: undefined, expected: PasswordComplexityValues.WEAK},
+        {description: 'password 12345678 should be weak', password: '12345678', expected: PasswordComplexityValues.GOOD},
+        {description: 'password 1abcdeft should be good', password: '1abcdeft', expected: PasswordComplexityValues.GOOD},
     ];
 
     theories.forEach(theory => {
