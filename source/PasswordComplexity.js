@@ -7,14 +7,27 @@ const PasswordComplexityValues = {
 const calculateComplexity = (password) => {
     let complexity = PasswordComplexityValues.WEAK;
     if (password) {
-        const passwordLength = password.length;
         const numbers = countNumbers(password);
         const containsLetters = hasLetters(password);
 
-        complexity = passwordLength >= 8 && (numbers >= 2 && containsLetters) ? PasswordComplexityValues.EXCELLENT : 
-        (passwordLength >= 8 || (numbers >= 2 && containsLetters)) ? PasswordComplexityValues.GOOD : PasswordComplexityValues.WEAK
+        const minimumLengthPassed = lengthIsGreaterOrEqualThan(password, 8);
+        const lettersAndAtLeastTwoNumbersPassed = containsLetters(password) && containsNumbers(password, 2);
+
+
+        complexity = minimumLengthPassed && lettersAndAtLeastTwoNumbersPassed   ? PasswordComplexityValues.EXCELLENT : 
+                     (minimumLengthPassed || lettersAndAtLeastTwoNumbersPassed) ? PasswordComplexityValues.GOOD : 
+                                                                                  PasswordComplexityValues.WEAK
     }
     return complexity;
+}
+
+function lengthIsGreaterOrEqualThan(password, minimumLength) {
+    return password.length >= minimumLength;
+}
+
+function containsNumbers(password, count) {
+    const numbers = countNumbers(password);
+    return numbers >= count;
 }
 
 function countNumbers(password) {
@@ -28,7 +41,7 @@ function countNumbers(password) {
     return count;
 }
 
-function hasLetters(password) {
+function containsLetters(password) {
     const expression = /[a-zA-Z]/g;;
     return expression.test(password);
 }
